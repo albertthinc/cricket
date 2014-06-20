@@ -1,0 +1,92 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Add new match type</div>
+		</div>
+		<div class="block-content collapse in">
+			<div class="span12">
+				<form class="form-horizontal" method="post" id="frmMatchTypes" action="/admin/match_types/add/">
+                                        <div class="control-group">
+                                            <label class="control-label" for="selectError">Team Type</label>
+                                            <div class="controls form-group">
+                                                <select class="form-control chzn-select span4" name="team_type_id">
+                                                    <option value="">Select</option>
+                                                    {html_options options=$team_types}
+                                                </select>
+                                            </div>
+                                          </div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Match Type</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="match_type" name="match_type" type="text" value="">
+					  </div>
+					</div>      
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Match Type Code</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="match_type_code" name="match_type_code" type="text" value="">
+					  </div>
+					</div> 
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Description</label>
+					  <div class="controls form-group">
+                                                <textarea class="input-xlarge focused textarea" style="width: 600px; height: 150px;" name="description"></textarea>
+					  </div>
+					</div>
+
+					<div class="control-group">
+					  <label class="control-label" for="selectError">Status</label>
+					  <div class="controls form-group">
+						<select id="status" name="status" class="input-xlarge">
+						  <option value="Active">Active</option>
+						  <option value="Inactive">Inactive</option>
+						</select>
+					  </div>
+					</div>
+
+					<div class="form-actions">
+					  <button type="submit" class="btn btn-primary">Save</button>
+					  <a href="/admin/languages/"><button type="button" class="btn">Cancel</button></a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<link href="{$BASEURL}/scripts/vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+<script src="{$BASEURL}scripts/vendors/wysiwyg/wysihtml5-0.3.0.js" type="text/javascript"></script>
+<script src="{$BASEURL}scripts/vendors/wysiwyg/bootstrap-wysihtml5.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+            $('.textarea').wysihtml5();
+            
+	    $('#frmMatchTypes').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+                    match_type: {
+			message: 'The match type is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The match type is required and can\'t be empty'
+			    }
+			}
+		    },
+                    match_type_code: {
+			message: 'The match type code is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The match type code is required and can\'t be empty'
+			    }
+			}
+		    }
+		}
+	    });
+	});
+</script>

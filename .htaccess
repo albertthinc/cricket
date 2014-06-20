@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule ^(uploads|admin|api|themes|user_guide|assets) - [L]
+RewriteCond $1 !^(index\.php|uploads|assets|images|user_guide|css|robots\.txt|themes)
+RewriteRule ^(.*)$ /index.php/$1 [L]

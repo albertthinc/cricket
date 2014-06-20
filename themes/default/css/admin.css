@@ -1,0 +1,140 @@
+/* Admin */
+.celling-box{
+	background:#b00c85;
+	width:170px;
+	height:90px;
+	margin:0 auto;
+}
+.admin-logo{
+	background: url(../img/logo.png) no-repeat;
+	display: block;
+	height: 72px;
+	width: 289px;
+	margin: 0 auto;
+}
+
+.account-auth-box{
+	position: absolute;
+	top: 22%;
+	left: 47%;
+	z-index: 100;
+	width: auto;
+	margin-left: -135px;
+}
+
+
+.container .login-elements{
+	min-height:300px;
+}
+.account-auth-box.change-pass{
+	position:relative;
+	width:415px;
+	margin-top: 40px;;
+}
+
+.change-pass .field-wrapper{
+	border-top:none;
+}
+
+.account-auth-box-head{
+	width:100%;
+	padding:20px 0px;
+	text-align:center;
+}
+
+.signin-form{
+	padding:10px 20px;
+	margin:0px;
+}
+.app-container{
+	margin-top:30px;
+}
+.left-menubar{
+	border-top:none;
+	background:#FFFFFF;
+}
+.left-menubar .accordion{
+	margin-bottom:0;
+}
+.left-menubar .accordion-group{
+	border-radius:0;
+	-webkit-border-radius: 0;
+	margin-bottom:15px;
+}
+.accord-symbol{
+	font-size:25px;
+	font-weight:300;
+}
+.left-menubar .accordion-toggle{
+	color:#b00c85;
+	font-size:17px;
+	padding: 13px 15px;
+}
+.left-menubar .accordion-toggle:hover{
+	text-decoration:none;
+}
+.left-menubar .accordion-toggle.collapsed{
+	color:#000000;	
+}
+.accordion-toggle .accord-symbol:before{
+	content: "-";
+}
+.accordion-toggle.collapsed .accord-symbol:before{
+	content: "+";
+	color:#000;
+}
+.accordion-group.open{
+	border-top:2px solid #b00c85;
+}
+.accordion-inner.sub-menu{
+	border:none;
+	padding:0;
+}
+.sub-menu li a{
+	color:#000000;
+	display:block;
+	padding:8px 15px;
+}
+.sub-menu li a:hover,.sub-menu li a.active{
+	color:#fff;
+	background:#b00c85;
+}
+
+.sub-menu-section{
+	border:1px solid #d7d7d7;
+	background:#ffffff;
+	padding:10px;
+}
+.dataTables_length,.dataTables_info{
+	float:left;
+}
+.dataTables_filter{
+	float:right;
+}
+.dataTables_paginate{
+	float:right;
+	margin:0px;
+}
+.pagination ul>li>a:hover, .pagination ul>li>a:focus, .pagination ul>.active>a, .pagination ul>.active>span {
+	background-color: #b00c85;
+	color:#fff;
+}
+
+.data-table thead tr:first-child{
+	background-color: #b00c85;
+}
+.data-table thead tr:first-child th{
+	padding-top:10px;
+	padding-bottom:10px;
+	color:#fff;
+}
+
+.info-section{
+	border-bottom:1px solid #d7d7d7;
+}
+.info-section h2{
+	font-size:18px;
+	font-weight:100;
+	padding:0;margin:0;
+	color:#b00c85;
+}

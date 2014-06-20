@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$pageTitle}</title>
+    <!-- Bootstrap -->
+    <link href="{$BASEURL}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{$BASEURL}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="{$BASEURL}css/admin_styles.css" rel="stylesheet" media="screen">
+     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<script src="{$BASEURL}scripts/vendors/jquery-1.9.1.min.js"></script>
+    <script src="{$BASEURL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$BASEURL}scripts/bootstrapValidator.js"></script>
+
+    <script src="{$BASEURL}scripts/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body>
+	<div id="login">
+		<div class="container">
+			{include file=$INNER_TPL}
+		</div> <!-- /container -->
+	</div>
+  </body>
+</html>

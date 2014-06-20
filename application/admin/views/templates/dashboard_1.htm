@@ -1,0 +1,215 @@
+
+<div class="row-fluid">
+    {if $USERDATA.user_info->group_id lt 18}
+     <div class="span12" id="content">
+          <!-- morris stacked chart -->
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">Slides Downloads</div>
+                        
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="hero-graph" style="height: 230px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+     </div>
+    {/if}
+    
+    <div class="span6" id="content">
+          <!-- morris stacked chart -->
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">Top Categories - Number of Slides</div>
+                        
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="hero-slides" style="height: 230px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+     </div>
+    <div class="span6" id="content" style="margin-left: 20px;">
+          <!-- morris stacked chart -->
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">Top Service Lines - Number of Slides</div>
+                        
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="hero-servicelines" style="height: 230px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+     </div>
+    <div class="span6" id="content">
+          <!-- morris stacked chart -->
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">Top Categories - Number of Slides</div>
+                        
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="showcase-categories" style="height: 230px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+     </div>
+    <div class="span6" id="content" style="margin-left: 20px;">
+          <!-- morris stacked chart -->
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">Showcase - Services lines</div>
+                        
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="showcase-servicelines" style="height: 230px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+     </div>
+</div>
+
+
+
+
+<link rel="stylesheet" href="/assets/scripts/vendors/morris/morris.css">
+<script src="/assets/scripts/vendors/raphael-min.js"></script>
+<script src="/assets/scripts/vendors/morris/morris.min.js"></script>
+        
+{literal}
+<script type="text/javascript">
+    var downloads_graph = [], category_slides_count = [], servicelines_slides_count = [];
+    $(document).ready(function(){
+         if( $("#hero-graph").size() > 0 ) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                async: false,
+                url: "/admin/dashboard/monthly_growth"
+              }).done(function( data ) {
+                downloads_graph =   data;
+            });
+            // Morris Area Chart
+            Morris.Line({
+                element: 'hero-graph',
+                data: downloads_graph,
+                xkey: 'created_date',
+                xLabels: "month",
+                ykeys: ['number_of_downloads'],
+                labels: ['Downloads']
+            });
+        }
+        
+        if( $("#hero-slides").size() > 0 ) {
+            
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                async: false,
+                url: "/admin/dashboard/slide_categories"
+              }).done(function( data ) {
+                category_slides_count =   data;
+            });
+
+            // Morris Bar Chart
+            Morris.Bar({
+                element: 'hero-slides',
+                data: category_slides_count,
+                xkey: 'category',
+                ykeys: ['number_of_slides'],
+                labels: ['Number of Slides'],
+                barRatio: 0.4,
+                xLabelMargin: 10,
+                hideHover: 'auto',
+                barColors: ["#3d88ba"]
+            });
+        }
+        
+        if( $("#hero-servicelines").size() > 0 ) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                async: false,
+                url: "/admin/dashboard/slide_servicelines"
+              }).done(function( data ) {
+                servicelines_slides_count =   data;
+            });
+             // Morris Donut Chart
+            Morris.Donut({
+                element: 'hero-servicelines',
+                data: servicelines_slides_count,
+                colors: ["#0099C6", "#AAAA11", "#E67300", "#8B0707", "#3B3EAC" ,"#B77322" , "#16D620", "#DC3912", "#990099"],
+                formatter: function (y) { return y + "%" }
+            });
+        }
+        
+        if( $("#showcase-servicelines").size() > 0 ) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                async: false,
+                url: "/admin/dashboard/showcase_servicelines"
+              }).done(function( data ) {
+                servicelines_slides_count =   data;
+            });
+             // Morris Donut Chart
+            Morris.Donut({
+                element: 'showcase-servicelines',
+                data: servicelines_slides_count,
+                colors: ["#0099C6", "#AAAA11", "#E67300", "#8B0707", "#3B3EAC" ,"#B77322" , "#16D620", "#DC3912", "#990099"],
+                formatter: function (y) { return y + "%" }
+            });
+        }
+        
+        if( $("#showcase-categories").size() > 0 ) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                async: false,
+                url: "/admin/dashboard/showcase_categories"
+              }).done(function( data ) {
+                category_slides_count =   data;
+            });
+
+            // Morris Bar Chart
+            Morris.Bar({
+                element: 'showcase-categories',
+                data: category_slides_count,
+                xkey: 'category',
+                ykeys: ['number_of_slides'],
+                labels: ['Number of Slides'],
+                barRatio: 0.4,
+                xLabelMargin: 10,
+                hideHover: 'auto',
+                barColors: ["#3d88ba"]
+            });
+        }
+    })    
+</script>
+{/literal}

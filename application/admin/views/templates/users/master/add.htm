@@ -1,0 +1,161 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Add new user</div>
+		</div>
+		<div class="block-content collapse in">
+			<div class="span12">
+				<form class="form-horizontal" method="post" id="frmUsers" action="/admin/users/master/add">
+                                        <div class="control-group">
+					  <label class="control-label" for="selectError">User Group</label>
+					  <div class="controls form-group">
+                                              <select class="form-control" name="group_id">
+                                                  <option value="">--Select--</option>
+                                                {html_options options=$user_groups}
+                                             </select>
+					  </div>
+					</div>
+                                    
+                                       <div class="control-group">
+                                        <label class="control-label" for="selectError">Service lines</label>
+                                        <div class="controls form-group">
+                                            <select class="form-control chzn-select span4" name="serviceline_id[]"  multiple="multiple">
+                                                <option value="">--Select--</option>
+                                              {html_options options=$servicelines}
+                                           </select>
+                                        </div>
+                                      </div>
+                                    
+					<div class="control-group ">
+					  <label class="control-label" for="focusedInput">First Name</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="first_name" name="first_name" type="text" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Last Name</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="last_name" name="last_name" type="text" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Email ID</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="email_id" name="email_id" type="text" value="">
+					  </div>
+					</div>
+                                    
+<!--                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Username</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="user_name" name="user_name" type="text" value="">
+					  </div>
+					</div>-->
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Password</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="password" name="password" type="password" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Confirm Password</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="confirm_password" name="confirm_password" type="password" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group">
+					  <label class="control-label" for="selectError">Status</label>
+					  <div class="controls form-group">
+                                              <select class="form-control" name="status">
+                                                  <option value="Active">Active</option>
+                                                  <option value="Inactive">Inactive</option>
+                                             </select>
+					  </div>
+					</div>
+
+					<div class="form-actions">
+					  <button type="submit" class="btn btn-primary">Save</button>
+					  <a href="/admin/users/master/"><button type="button" class="btn">Cancel</button></a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<link href="{$BASEURL}/scripts/vendors/chosen.min.css" rel="stylesheet" media="screen">
+<script src="{$BASEURL}/scripts/vendors/chosen.jquery.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+            $(".chzn-select").chosen();
+            
+	    $('#frmUsers').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {    
+                    group_id: {
+			validators: {
+			    notEmpty: {
+				message: 'The user group is required and can\'t be empty'
+			    }
+			}
+		    },                    
+		    first_name: {
+			message: 'The first name is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The first name is required and can\'t be empty'
+			    }
+			}
+		    },
+                    email_id: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The email id is required and can\'t be empty'
+                            },
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },
+                    /*user_name: {
+			message: 'The user name is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The user name is required and can\'t be empty'
+			    }
+			}
+		    },*/
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'confirmPassword',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    },
+                    confirm_password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The confirm password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'password',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    }
+		}
+	    });
+	});
+</script>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$pageTitle}</title>
+    <!-- Bootstrap -->
+    <link href="{$BASEURL}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{$BASEURL}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="{$BASEURL}css/admin_styles.css" rel="stylesheet" media="screen">
+     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script src="{$BASEURL}scripts/vendors/jquery-1.9.1.min.js"></script>
+    <script src="{$BASEURL}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{$BASEURL}scripts/bootstrapValidator.js"></script>
+
+    <script src="{$BASEURL}scripts/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body>
+	<div class="navbar navbar-fixed-top header">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#"></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right custom-nav">
+                            <li class="dropdown">
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> {$USERDATA.user_info.personal_details->first_name}&nbsp;{$USERDATA.user_info.personal_details->last_name} <i class="caret" style="margin-top: 15px;"></i>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!--<li>
+                                        <a tabindex="-1" href="/slides/">Site</a>
+                                    </li>-->
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a tabindex="-1" href="/admin/users/logout/">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav custom-nav">
+                            <li {if $controller eq "dashboard"} class="active" {/if}>
+                                <a href="/admin/dashboard">Dashboard</a>
+                            </li>
+                            {if 1|in_array:$USERDATA.user_info.groups_assigned}
+                            <li  {if $controller eq "users"} class="active dropdown" {else} class="dropdown" {/if}>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Users <i class="caret" style="margin-top: 15px;"></i>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li {if $controller eq "users" && $page eq "master"} class="active" {/if}>
+                                        <a tabindex="-1" href="/admin/users/master">User List</a>
+                                    </li>
+                                    <li {if $controller eq "users" && $page eq "roles"} class="active" {/if}>
+                                        <a tabindex="-1" href="/admin/users/roles">User Groups</a>
+                                    </li>
+                                    <li {if $controller eq "users" && $page eq "assign"} class="active" {/if}>
+                                        <a tabindex="-1" href="/admin/users/assign">User Assign</a>
+                                    </li>
+                                    <!--<li>
+                                        <a tabindex="-1" href="/admin/users/permission/">Permissions</a>
+                                    </li>-->
+                                </ul>
+                            </li>
+                                                     
+                             {/if}
+                             {if 1|in_array:$USERDATA.user_info.groups_assigned}
+                            <li  {if $controller eq "content"} class="active dropdown" {else} class="dropdown" {/if}>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Content <i class="caret" style="margin-top: 15px;"></i>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li {if $controller eq "content" && $page eq "pages"} class="active" {/if}>
+                                        <a tabindex="-1" href="/admin/content/pages">Pages</a>
+                                    </li>
+                                </ul>
+                            </li>            
+                             {/if}
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li {if $controller eq "dashboard"} class="active" {/if}>
+                            <a href="/admin/dashboard/"><i class="icon-chevron-right"></i> Dashboard</a>
+                        </li>
+                        {if 1|in_array:$USERDATA.user_info.groups_assigned}
+                            <li {if $controller eq "players"} class="active" {/if}>
+                                <a href="/admin/players/"><i class="icon-chevron-right"></i> Manage Players</a>
+                            </li>
+                            <li {if $controller eq "captains"} class="active" {/if}>
+                                <a href="/admin/captains/"><i class="icon-chevron-right"></i> Manage captains</a>
+                            </li>
+                            <li {if $controller eq "umpires"} class="active" {/if}>
+                                <a href="/admin/umpires/"><i class="icon-chevron-right"></i> Manage Umpires</a>
+                            </li>
+                            <li {if $controller eq "team_types"} class="active" {/if}>
+                                <a href="/admin/team_types/"><i class="icon-chevron-right"></i> Manage Team Types</a>
+                            </li>    
+                            <li {if $controller eq "match_types"} class="active" {/if}>
+                                <a href="/admin/match_types/"><i class="icon-chevron-right"></i> Manage Match Types</a>
+                            </li>
+                            <li {if $controller eq "venues"} class="active" {/if}>
+                                <a href="/admin/venues/"><i class="icon-chevron-right"></i> Manage Venues</a>
+                            </li>
+                            <li {if $controller eq "teams"} class="active" {/if}>
+                                <a href="/admin/teams/"><i class="icon-chevron-right"></i> Manage Teams</a>
+                            </li>
+                            <li {if $controller eq "team_players"} class="active" {/if}>
+                                <a href="/admin/team_players/"><i class="icon-chevron-right"></i> Manage Team Players</a>
+                            </li>
+                            <li {if $controller eq "matchs"} class="active" {/if}>
+                                <a href="/admin/matchs/"><i class="icon-chevron-right"></i> Manage Match's</a>
+                            </li>
+                            <li {if $controller eq "player_suspension"} class="active" {/if}>
+                                <a href="/admin/player_suspension/"><i class="icon-chevron-right"></i> Manage Player Suspension</a>
+                            </li>
+                            <li {if $controller eq "news"} class="active" {/if}>
+                                <a href="/admin/news/"><i class="icon-chevron-right"></i> Manage News</a>
+                            </li>
+                            <li {if $controller eq "events"} class="active" {/if}>
+                                <a href="/admin/events/"><i class="icon-chevron-right"></i> Manage Events</a>
+                            </li>
+                            <li {if $controller eq "albums"} class="active" {/if}>
+                                <a href="/admin/albums/"><i class="icon-chevron-right"></i> Manage Albums/Pictures</a>
+                            </li>
+                        {/if}                                                                                    
+                    </ul>   
+                </div>
+                <!--/span-->
+                <div class="span9" id="content">
+                    {include file=$INNER_TPL}
+                </div>
+            </div>
+            <hr>
+            <footer>
+                <p>&copy; MSCL 2014</p>
+            </footer>
+        </div>
+        <!--/.fluid-container-->
+
+        
+  </body>
+</html>

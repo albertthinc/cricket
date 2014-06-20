@@ -1,0 +1,12 @@
+{
+	"name": "Homepage",
+    "cname": "homepage",
+	"description": "This module handles the visitors point of entrance in the app.",
+	"author": "José Postiga",
+    "email": "jose.postiga@josepostiga.com",
+    "version": "0.1",
+	"license": "GPL",
+    "updater": "https://core.josepostiga.com/updater/",
+	"require": {},
+    "database": []
+}

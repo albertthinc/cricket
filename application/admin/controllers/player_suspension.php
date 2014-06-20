@@ -1,0 +1,96 @@
+<?php 
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+ini_set('memory_limit', '-1');
+
+class Player_suspension extends CI_Controller {
+    
+    public function __construct() {
+        parent::__construct();
+
+        is_logged_in();
+
+        $this->load->model("playersuspension_model");
+        $this->load->model("users_model");
+    }
+
+    public function index()
+    {
+        $suspensions  =   $this->playersuspension_model->get_suspesions();        
+        $this->smarty->assign("suspensions", $suspensions);        
+        
+        $this->smarty->assign('MESSAGE', $this->session->flashdata('errors'));
+        $this->smarty->assign('INNER_TPL', 'player_suspension/list.htm');
+        $this->smarty->assign('pageTitle', 'Player Suspensions - '.APP_NAME);
+        $this->smarty->view('layout_master');
+    }
+    
+    public function create()
+    {
+        $players  =   $this->users_model->get_users(2);
+        foreach($players As $key => $value)
+        {
+            $players_array[$value['user_id']]  =   $value["first_name"]." ".$value["last_name"];
+        }
+        $this->smarty->assign("players", $players_array);
+        
+        $this->smarty->assign('INNER_TPL', 'player_suspension/add.htm');
+        $this->smarty->assign('pageTitle', 'Player Suspensions - '.APP_NAME);
+        $this->smarty->view('layout_master');
+    }
+    
+    public function add()
+    {
+        $_POST['group_id']  =   2;
+        $this->users_model->add_user();
+        $this->session->set_flashdata('errors', $this->users_model->status_msg);
+        redirect("/players", 'location');
+    }
+    
+    public function edit()
+    {
+        $countries  =   $this->countries_model->get_countries("Active");
+        foreach($countries As $key => $value)
+        {
+            $countries_array[$value['country_id']]  =   $value["country_name"];
+        }
+        $this->smarty->assign("countries", $countries_array);
+        
+        $states  =   $this->states_model->get_states("Active");
+        foreach($states As $key => $value)
+        {
+            $states_array[$value['state_id']]  =   $value["state_name"];
+        }
+        $this->smarty->assign("states", $states_array);
+        
+        $cities  =   $this->cities_model->get_cities("Active");
+        foreach($cities As $key => $value)
+        {
+            $cities_array[$value['city_id']]  =   $value["city_name"];
+        }
+        $this->smarty->assign("cities", $cities_array);
+        
+        $player_detail  =   $this->users_model->get_user(end($this->uri->segment_array()));        
+        $this->smarty->assign("player_detail", $player_detail);
+        
+        
+        
+        $user_groups_for_assign =   array("2" => "Player", "3" => "Umpire", "4" => "Captain");
+        $this->smarty->assign("user_groups_for_assign", $user_groups_for_assign);
+        
+        $this->smarty->assign("user_group_assigned", $this->users_model->user_groups_assigned);
+        
+        $this->smarty->assign('INNER_TPL', 'players/edit.htm');
+        $this->smarty->assign('pageTitle', 'Players - '.APP_NAME);
+        $this->smarty->view('layout_master');
+    }
+    
+    public function update()
+    {
+        $_POST['group_id']  =   2;
+        
+        $this->users_model->update_user();
+        $this->session->set_flashdata('errors', $this->users_model->status_msg);
+        redirect("/players", 'location');
+    }
+}

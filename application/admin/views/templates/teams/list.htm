@@ -1,0 +1,61 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Teams</div>
+			<a href="/admin/teams/create/"><button class="btn btn-primary muted pull-right" style="margin-top: 7px;">Add New</button></a>
+		</div>
+            
+		<div class="block-content collapse in">
+			<div class="span12">
+                                {if $MESSAGE ne ""}
+                                <div class="alert alert-error">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    {$MESSAGE}
+                                </div>
+                                {/if}
+				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Short Name</th>
+                                                        <th>Captain</th>
+                                                        <th>Contact</th>
+                                                        <th>Status</th>
+							<th width="150">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+                                                {foreach from=$teams item=item key=key}
+						<tr>
+							<td>{$item.team_name}</td>
+                                                        <td>{$item.team_type_name}</td>
+                                                        <td>{$item.team_name}</td>
+                                                        <td>{$item.captain_name}</td>
+							<td>{$item.contact_name}</td>
+                                                        <td>{$item.status}</td>
+							<td>
+								<a href="/admin/teams/edit/{$item.team_id}"><button class="btn">Edit</button></a>
+                                                                &nbsp;
+                                                                <a data-href="/admin/teams/delete/{$item.team_id}" data-toggle="confirmation" data-placement="top" data-original-title="" title=""><button class="btn btn-primary">Delete</button></a>                                                                
+							</td>
+						</tr>
+                                                {/foreach}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- /block -->
+</div>
+
+<script src="{$BASEURL}scripts/vendors/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{$BASEURL}scripts/DT_bootstrap.js"></script>
+<script src="{$BASEURL}bootstrap/js/bootstrap-confirmation.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="confirmation"]').confirmation({ "animation" : true, singleton : true })
+    })
+    
+</script>

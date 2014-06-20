@@ -1,0 +1,193 @@
+<?php /* Smarty version Smarty-3.1.16, created on 2014-03-10 10:30:20
+         compiled from "../application/admin/views/templates/users/master/add.htm" */ ?>
+<?php /*%%SmartyHeaderCode:434094477531d46e4bb97a8-18092792%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6dc3db7db0e16f07ffbba9369e7fd2c72f982ede' => 
+    array (
+      0 => '../application/admin/views/templates/users/master/add.htm',
+      1 => 1394427613,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '434094477531d46e4bb97a8-18092792',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'user_groups' => 0,
+    'servicelines' => 0,
+    'BASEURL' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.16',
+  'unifunc' => 'content_531d46e4c2c901_44870969',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_531d46e4c2c901_44870969')) {function content_531d46e4c2c901_44870969($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/sites/presentationcreator.ragedev/public_html/application/admin/libraries/smarty/libs/plugins/function.html_options.php';
+?><div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Add new user</div>
+		</div>
+		<div class="block-content collapse in">
+			<div class="span12">
+				<form class="form-horizontal" method="post" id="frmUsers" action="/admin/users/master/add">
+                                        <div class="control-group">
+					  <label class="control-label" for="selectError">User Group</label>
+					  <div class="controls form-group">
+                                              <select class="form-control" name="group_id">
+                                                  <option value="">--Select--</option>
+                                                <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['user_groups']->value),$_smarty_tpl);?>
+
+                                             </select>
+					  </div>
+					</div>
+                                    
+                                       <div class="control-group">
+                                        <label class="control-label" for="selectError">Service lines</label>
+                                        <div class="controls form-group">
+                                            <select class="form-control chzn-select span4" name="serviceline_id[]"  multiple="multiple">
+                                                <option value="">--Select--</option>
+                                              <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['servicelines']->value),$_smarty_tpl);?>
+
+                                           </select>
+                                        </div>
+                                      </div>
+                                    
+					<div class="control-group ">
+					  <label class="control-label" for="focusedInput">First Name</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="first_name" name="first_name" type="text" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Last Name</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="last_name" name="last_name" type="text" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Email ID</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="email_id" name="email_id" type="text" value="">
+					  </div>
+					</div>
+                                    
+<!--                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Username</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="user_name" name="user_name" type="text" value="">
+					  </div>
+					</div>-->
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Password</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="password" name="password" type="password" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Confirm Password</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="confirm_password" name="confirm_password" type="password" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group">
+					  <label class="control-label" for="selectError">Status</label>
+					  <div class="controls form-group">
+                                              <select class="form-control" name="status">
+                                                  <option value="Active">Active</option>
+                                                  <option value="Inactive">Inactive</option>
+                                             </select>
+					  </div>
+					</div>
+
+					<div class="form-actions">
+					  <button type="submit" class="btn btn-primary">Save</button>
+					  <a href="/admin/users/master/"><button type="button" class="btn">Cancel</button></a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<link href="<?php echo $_smarty_tpl->tpl_vars['BASEURL']->value;?>
+/scripts/vendors/chosen.min.css" rel="stylesheet" media="screen">
+<script src="<?php echo $_smarty_tpl->tpl_vars['BASEURL']->value;?>
+/scripts/vendors/chosen.jquery.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+            $(".chzn-select").chosen();
+            
+	    $('#frmUsers').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {    
+                    group_id: {
+			validators: {
+			    notEmpty: {
+				message: 'The user group is required and can\'t be empty'
+			    }
+			}
+		    },                    
+		    first_name: {
+			message: 'The first name is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The first name is required and can\'t be empty'
+			    }
+			}
+		    },
+                    email_id: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The email id is required and can\'t be empty'
+                            },
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },
+                    /*user_name: {
+			message: 'The user name is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The user name is required and can\'t be empty'
+			    }
+			}
+		    },*/
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'confirmPassword',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    },
+                    confirm_password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The confirm password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'password',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    }
+		}
+	    });
+	});
+</script><?php }} ?>

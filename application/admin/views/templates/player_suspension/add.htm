@@ -1,0 +1,173 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Add new suspension</div>
+		</div>
+		<div class="block-content collapse in">
+                    <div class="span12">
+                        <form class="form-horizontal" method="post" id="frmSuspension" action="/admin/player_suspension/add/">
+                            
+                            <div class="control-group ">
+                              <label class="control-label" for="focusedInput">Season</label>
+                              <div class="controls form-group">
+                                    <input class="input-xlarge focused" id="season" name="season" type="text" value="">
+                              </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Player</label>
+                                <div class="controls form-group">
+                                    <select class="form-control chzn-select span4" name="player_id">
+                                        <option value="">Select</option>
+                                        {html_options options=$players}
+                                    </select>
+                                </div>
+                              </div>
+                            
+                            <div class="control-group ">
+                              <label class="control-label" for="focusedInput">Abbreviation</label>
+                              <div class="controls form-group">
+                                    <input class="input-xlarge focused" id="abbreviation" name="abbreviation" type="text" value="">
+                              </div>
+                            </div>
+                            
+                            <div class="control-group ">
+                              <label class="control-label" for="focusedInput">Short Name</label>
+                              <div class="controls form-group">
+                                    <input class="input-xlarge focused" id="team_short_name" name="team_short_name" type="text" value="">
+                              </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Captain</label>
+                                <div class="controls form-group">
+                                    <select class="form-control chzn-select span4" name="captain">
+                                        <option value="">Select</option>
+                                        {html_options options=$captains}
+                                    </select>
+                                </div>
+                              </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Contact Person</label>
+                                <div class="controls form-group">
+                                    <select class="form-control chzn-select span4" name="contact">
+                                        <option value="">Select</option>
+                                        {html_options options=$contactusers}
+                                    </select>
+                                </div>
+                              </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Home Ground</label>
+                                <div class="controls form-group">
+                                    <select class="form-control chzn-select span4" name="venue_id">
+                                        <option value="">Select</option>
+                                        {html_options options=$venues}
+                                    </select>
+                                </div>
+                              </div>
+                            
+                            <div class="control-group ">
+                                <label class="control-label" for="focusedInput">Description</label>
+                                <div class="controls form-group">
+                                      <textarea class="input-xlarge focused textarea" style="width: 600px; height: 150px;" name="description"></textarea>
+                                </div>
+                              </div>   
+
+                            <div class="control-group">
+                              <label class="control-label" for="selectError">Status</label>
+                              <div class="controls form-group">
+                                    <select id="status" name="status" class="input-xlarge">
+                                      <option value="Active">Active</option>
+                                      <option value="Inactive">Inactive</option>
+                                    </select>
+                              </div>
+                            </div>
+
+                            <div class="form-actions">
+                              <button type="submit" class="btn btn-primary">Save</button>
+                              <a href="/admin/categories/"><button type="button" class="btn">Cancel</button></a>
+                            </div>
+                        </form>
+                    </div>
+		</div>
+	</div>
+</div>
+
+<link href="{$BASEURL}/scripts/vendors/chosen.min.css" rel="stylesheet" media="screen">
+<script src="{$BASEURL}/scripts/vendors/chosen.jquery.min.js"></script>
+
+<link href="{$BASEURL}/scripts/vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+<script src="{$BASEURL}scripts/vendors/wysiwyg/wysihtml5-0.3.0.js" type="text/javascript"></script>
+<script src="{$BASEURL}scripts/vendors/wysiwyg/bootstrap-wysihtml5.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+            $(".chzn-select").chosen();
+            $('.textarea').wysihtml5();
+            
+	    $('#frmTeams').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+		    team_type_id: {
+			message: 'The team type is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The team type is required and can\'t be empty'
+			    }
+			}
+		    },
+                    team_name: {
+			message: 'The team name is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The team name is required and can\'t be empty'
+			    }
+			}
+		    },
+                    abbreviation: {
+			message: 'The abbreviation is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The abbreviation is required and can\'t be empty'
+			    }
+			}
+		    },
+                    team_short_name: {
+			message: 'The team short name is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The team short name is required and can\'t be empty'
+			    }
+			}
+		    },
+                    captain: {
+			message: 'The captain is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The captain is required and can\'t be empty'
+			    }
+			}
+		    },
+                    contact: {
+			message: 'The contact is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The contact is required and can\'t be empty'
+			    }
+			}
+		    },
+                    venue_id: {
+			message: 'The venue is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The venue is required and can\'t be empty'
+			    }
+			}
+		    }
+		}
+	    });
+	});
+</script>

@@ -1,0 +1,63 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Pictures</div>
+                        <span class="pull-right">
+                            <a href="/admin/albums/"><button class="btn muted ">Back to Albums</button></a>&nbsp;
+                            <a href="/admin/albums/upload_picture/?album_id={$smarty.request.album_id}"><button class="btn btn-primary muted">Add New</button></a>
+                        </span>
+		</div>
+            
+		<div class="block-content collapse in">
+			<div class="span12">
+                                {if $MESSAGE ne ""}
+                                <div class="alert alert-error">
+                                    <button type="button" class="close" data-dismiss="alert">X</button>
+                                    {$MESSAGE}
+                                </div>
+                                {/if}
+				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+                                                    <th>Title</th>
+                                                    <th>Title</th>
+                                                    <th width="200">Short Description</th>
+                                                    <th>Status</th>
+                                                    <th width="100">Created On</th>
+                                                    <th width="150">Action</th>
+						</tr>
+					</thead>
+                                        
+					<tbody>
+                                                {foreach from=$albumpictures item=item key=key}
+						<tr>
+                                                    <td><img src="/uploads/albums/{$smarty.request.album_id}/photos/{$item.file_name}" width="100" /></td>
+                                                    <td>{$item.title}</td>
+                                                    <td>{$item.description}</td>
+                                                    <td>{$item.status}</td>
+                                                    <td>{$item.created_on|date_format}</td>
+                                                    <td>
+                                                            <a href="/admin/albums/picture_edit/{$item.photo_id}"><button class="btn">Edit</button></a>
+                                                            &nbsp;
+                                                            <a data-href="/admin/albums/picture_delete/{$item.photo_id}/?album_id={$item.album_id}" data-toggle="confirmation" data-placement="top" data-original-title="" title=""><button class="btn btn-primary">Delete</button></a>                                                                
+                                                    </td>
+						</tr>
+                                                {/foreach}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- /block -->
+</div>
+
+<script src="{$BASEURL}scripts/vendors/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{$BASEURL}scripts/DT_bootstrap.js"></script>
+<script src="{$BASEURL}bootstrap/js/bootstrap-confirmation.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="confirmation"]').confirmation({ "animation" : true, singleton : true })
+    })
+    
+</script>

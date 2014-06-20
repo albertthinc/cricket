@@ -1,0 +1,85 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Add new team player</div>
+		</div>
+		<div class="block-content collapse in">
+                    <div class="span12">
+                        <form class="form-horizontal" method="post" id="frmTeams" action="/admin/team_players/add/">
+                            
+                            <div class="control-group ">
+                                <label class="control-label" for="focusedInput">Season</label>
+                                <div class="controls form-group">
+                                      <input class="input-xlarge focused" id="season" name="season" type="text" value="">
+                                </div>
+                              </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Teams</label>
+                                <div class="controls form-group">
+                                    <select class="form-control chzn-select span4" name="team_id">
+                                        <option value="">Select</option>
+                                        {html_options options=$teams}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Player</label>
+                                <div class="controls form-group">
+                                    <select class="form-control chzn-select span4" name="user_id">
+                                        <option value="">Select</option>
+                                        {html_options options=$players}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                              <button type="submit" class="btn btn-primary">Save</button>
+                              <a href="/admin/team_players/"><button type="button" class="btn">Cancel</button></a>
+                            </div>
+                        </form>
+                    </div>
+		</div>
+	</div>
+</div>
+
+<link href="{$BASEURL}/scripts/vendors/chosen.min.css" rel="stylesheet" media="screen">
+<script src="{$BASEURL}/scripts/vendors/chosen.jquery.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+            $(".chzn-select").chosen();
+            
+	    $('#frmTeams').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+                    season: {
+			message: 'The season is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The season is required and can\'t be empty'
+			    }
+			}
+		    },
+		    team_id: {
+			message: 'The team is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The team is required and can\'t be empty'
+			    }
+			}
+		    },
+                    user_id: {
+			message: 'The player is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The player is required and can\'t be empty'
+			    }
+			}
+		    }
+		}
+	    });
+	});
+</script>

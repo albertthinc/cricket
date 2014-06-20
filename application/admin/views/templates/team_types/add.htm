@@ -1,0 +1,70 @@
+<div class="row-fluid">
+	<!-- block -->
+	<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">Add new team type</div>
+		</div>
+		<div class="block-content collapse in">
+			<div class="span12">
+				<form class="form-horizontal" method="post" id="frmTeamTypes" action="/admin/team_types/add/">
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Team Type</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="team_type" name="team_type" type="text" value="">
+					  </div>
+					</div>
+                                    
+                                        <div class="control-group ">
+					  <label class="control-label" for="focusedInput">Short code</label>
+					  <div class="controls form-group">
+						<input class="input-xlarge focused" id="short_code" name="short_code" type="text" value="">
+					  </div>
+					</div>   
+
+					<div class="control-group">
+					  <label class="control-label" for="selectError">Status</label>
+					  <div class="controls form-group">
+						<select id="status" name="status" class="input-xlarge">
+						  <option value="Active">Active</option>
+						  <option value="Inactive">Inactive</option>
+						</select>
+					  </div>
+					</div>
+
+					<div class="form-actions">
+					  <button type="submit" class="btn btn-primary">Save</button>
+					  <a href="/admin/languages/"><button type="button" class="btn">Cancel</button></a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+
+	    $('#frmTeamTypes').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+                    team_type: {
+			message: 'The team type is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The team type is required and can\'t be empty'
+			    }
+			}
+		    },
+                    short_code: {
+			message: 'The short code is not valid',
+			validators: {
+			    notEmpty: {
+				message: 'The short code is required and can\'t be empty'
+			    }
+			}
+		    }
+		}
+	    });
+	});
+</script>
